@@ -1,4 +1,6 @@
-# ![This is an image](https://www.vectorlogo.zone/logos/nodejs/nodejs-horizontal.svg) Node.js - Лабораторна робота 4
+Node.js - Лабораторна робота 4
+
+Виконав: Добридник Дмитро ІК-03
 
 ### _Тема: REST API та OpenAPI_
 
