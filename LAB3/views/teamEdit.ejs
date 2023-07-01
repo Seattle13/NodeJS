@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Team</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <h1>Edit Team</h1>
+    <form method="POST" action="/teams/?_method=PUT">
+      <label for="name">Team Name:</label>
+      <input type="text" id="name" name="name" />
+      <br /><br />
+      <button type="submit">Save Changes</button>
+    </form>
+    <form method="POST" action="/teams/?_method=DELETE">
+      <button type="submit">Delete Team</button>
+    </form>
+  </body>
+</html>

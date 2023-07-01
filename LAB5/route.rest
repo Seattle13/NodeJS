@@ -1,0 +1,155 @@
+//////////////////////////////////////////////////////////// Example
+
+GET http://localhost:3000
+
+//////////////////////////////////////////////////////////// Games
+
+###
+GET http://localhost:3000/games
+
+###
+GET http://localhost:3000/games/64528a6cda962b1c8c0537f8
+
+###
+POST http://localhost:3000/games
+Content-Type: application/json
+
+{
+  "date": "2023-04-29",
+  "team1Name": "Real Madrid",
+  "team2Name": "Barcelona",
+  "team1Score": 3,
+  "team2Score": 5
+}
+
+###
+POST http://localhost:3000/games
+Content-Type: application/json
+
+{
+  "date": "2023-04-29",
+  "team1Name": "Real Madrid",
+  "team2Name": "Bayern",
+  "team1Score": 2,
+  "team2Score": 4
+}
+
+###
+PATCH  http://localhost:3000/games/644ecc8e202c1d0799547865
+Content-Type: application/json
+
+{
+  "date": "2023-04-30",
+  "team1Name": "Manchester Citi",
+  "team2Name": "Milan",
+  "team1Score": 4,
+  "team2Score": 4
+}
+
+###
+PATCH  http://localhost:3000/games/644ecc8e202c1d0799547865
+Content-Type: application/json
+
+{
+  "date": "2023-04-29",
+  "team1Name": "PSG",
+  "team2Name": "Lion",
+  "team1Score": 6,
+  "team2Score": 3
+}
+
+###
+DELETE  http://localhost:3000/games/644ecc8e202c1d0799547865
+
+
+//////////////////////////////////////////////////////////// Teams
+
+
+###
+GET http://localhost:3000/teams/64528b0cda962b1c8c05380a
+
+###
+GET http://localhost:3000/teams/64528aafda962b1c8c053802
+
+###
+POST http://localhost:3000/teams
+Content-Type: application/json
+
+{
+  "name": "Arsenal"
+}
+
+###
+POST http://localhost:3000/teams
+Content-Type: application/json
+
+{
+  "name": "Bayern"
+}
+
+###
+PATCH http://localhost:3000/teams/64528aafda962b1c8c053802
+Content-Type: application/json
+
+{
+  "name": "Everton",
+  "gamesIds": ["64536ea3b1c8adb83aaf1eb1"]
+}
+
+###
+PATCH  http://localhost:3000/teams/644ed0fa160fbe10dbc3a3a3
+Content-Type: application/json
+
+{
+  "name": "Atletico"
+}
+
+###
+DELETE  http://localhost:3000/teams/644ed626608b5a793b4ab1c2
+
+//////////////////////////////////////////////////////////// Games-Teams
+
+###
+GET http://localhost:3000/game-team
+
+###
+GET http://localhost:3000/game-team/645159817c4647d0c924ac38
+
+###
+POST http://localhost:3000/game-team
+Content-Type: application/json
+
+{
+  "game": "64528b0cda962b1c8c05380a",
+  "team": "644c4c523921c44b47585b45"
+}
+
+###
+POST http://localhost:3000/game-team
+Content-Type: application/json
+
+{
+  "game": "644ec5216cc05d5d606fbba4",
+  "team": "644eb24f7c894df4e351e2f7"
+}
+
+###
+PATCH  http://localhost:3000/game-team/644ee4fc78d2c01f16ed42d9
+Content-Type: application/json
+
+{
+  "game": "644eaa806a7c46306501a037",
+  "team": "644e9ccd220e5e40a2deeb50"
+}
+
+###
+PATCH  http://localhost:3000/game-team/644ee4fc78d2c01f16ed42d9
+Content-Type: application/json
+
+{
+  "game": "644eaa806a7c46306501a037",
+  "team": "644e9ccd220e5e40a2deeb50"
+}
+
+###
+DELETE  http://localhost:3000/game-team/644ee4fc78d2c01f16ed42d9

@@ -1,0 +1,56 @@
+    <%- include('partials/header.ejs') %>
+    <main>
+      <section>
+        <form action="/games" method="POST">
+          <label for="date">Date:</label>
+          <input type="text" id="date" name="date" required /><br /><br />
+          <div class="teams">
+            <div class="team">
+              <label for="team1">Team 1:</label>
+              <select id="team1" name="team1Id">
+                <% teams.forEach(team => { %>
+                <option value="<%= team.id %>"><%= team.name %></option>
+                <% }); %>
+              </select>
+            </div>
+            <div class="team">
+              <label for="team2">Team 2:</label>
+              <select id="team2" name="team2Id">
+                <% teams.forEach(team => { %>
+                <option value="<%= team.id %>"><%= team.name %></option>
+                <% }); %>
+              </select>
+            </div>
+          </div>
+          <div class="scores">
+            <div class="score">
+              <label for="team1Score">Score 1:</label>
+              <select id="team1Score" name="team1Score">
+                <% results.forEach(result => { %>
+                <option value="<%= result.team1Score %>">
+                  <%= result.team1Score %>
+                </option>
+                <% }); %>
+              </select>
+            </div>
+            <div class="score">
+              <label for="team2Score">Score 2:</label>
+              <select id="team2Score" name="team2Score">
+                <% results.forEach(result => { %>
+                <option value="<%= result.team2Score %>">
+                  <%= result.team2Score %>
+                </option>
+                <% }); %>
+              </select>
+            </div>
+          </div>
+          <input type="submit" value="Add game" />
+        </form>
+        <form action="/teams/edit" method="POST" id="teams-form">
+          <button type="submit">Create New Team</button>
+        </form>
+      </section>
+    </main>
+    <%- include('partials/footer-admin.ejs') %>
+  </body>
+</html>

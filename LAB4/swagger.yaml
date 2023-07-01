@@ -1,0 +1,432 @@
+openapi: 3.0.0
+info:
+  title: Games API
+  version: 1.0.0
+  description: This API manages games and teams for a sports league.
+servers:
+  - url: http://localhost:3000/
+  - url: https://rest-api-oo3j.onrender.com/
+paths:
+  /:
+    get:
+      summary: Welcome page
+      responses:
+        '200':
+          description: A welcome message
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Games Schedule"
+
+  /games:
+    get:
+      summary: Get list of all games
+      responses:
+        '200':
+          description: A list of games
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+    post:
+      summary: Create a new game
+      requestBody:
+        description: Game object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGame'
+      responses:
+        '201':
+          description: The created game object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Invalid input
+    
+  /games/{id}:
+    get:
+      summary: Get a game by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the game to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The requested game
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          description: Game not found
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Update a game by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the game to update
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        description: The updated game data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGame'
+      responses:
+        '200':
+          description: The updated game object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Invalid input data
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Team not found
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      summary: Delete a game by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the game to delete
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The deleted game object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          description: Game not found
+          content:
+            text/plain:
+              schema:
+                type: string
+  
+  /pagination/games:
+    get:
+      summary: Get a paginated list of games
+      parameters:
+        - in: query
+          name: page
+          description: Page number to retrieve (default: 1)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - in: query
+          name: limit
+          description: Number of items per page (default: 5)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: A paginated list of games
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        '400':
+          description: Bad request, incorrect request parameters
+        '500':
+          description: Internal server error
+
+  /teams:
+    get:
+      summary: Get list of all teams
+      responses:
+        '200':
+          description: A list of teams
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+    post:
+      summary: Create a new team
+      requestBody:
+        description: Team object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTeam'
+      responses:
+        '200':
+          description: The created team object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Invalid input
+          
+  /teams/{id}:
+    get:
+      summary: Get a team by ID
+      parameters:
+        - in: path 
+          name: id
+          required: true
+          description: ID of the team to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The requested team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '404':
+          description: Team not found
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Update a team by ID
+      parameters:
+        - in: path 
+          name: id
+          required: true
+          description: The ID of the team to update
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        description: The updated team data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTeam'
+      responses:
+        '200':
+          description: The updated team object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Invalid input data
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Game not found
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      summary: Delete a team by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the team to delete
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The deleted team object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '404':
+          description: Team not found
+          content:
+            text/plain:
+              schema:
+                type: string
+  
+  /pagination/teams:
+      get:
+        summary: Get a paginated list of teams
+        parameters:
+          - in: query 
+            name: page
+            description: Page number to retrieve (default: 1)
+            required: false
+            schema:
+              type: integer
+              minimum: 1
+          - in: query 
+            name: limit
+            description: Number of items per page (default: 5)
+            required: false
+            schema:
+              type: integer
+              minimum: 1
+        responses:
+          '200':
+            description: A paginated list of teams
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Team'
+          '400':
+            description: Bad request, incorrect request parameters
+          '500':
+            description: Internal server error
+  
+  /filtration/teams:
+    get:
+      summary: Get a filtered list of teams
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: Name of the team we are looking for
+      responses:
+        '200':
+          description: A filtered list of teams
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: Team ID
+                    name:
+                      type: string
+                      description: Team name
+                  example:
+                    - id: 1
+                      name: "Team A"
+                    - id: 2
+                      name: "Team B"
+        '400':
+          description: Missing search query
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: No teams found for this name
+          content:
+            text/plain:
+              schema:
+                type: string
+
+components:
+  schemas:
+    Game:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Game ID
+        date:
+          type: string
+          description: Game date
+          format: date-time
+        team1Id:
+          type: integer
+          description: Team1 ID value
+        team2Id:
+          type: integer
+          description: Team2 ID value
+        team1Score:
+          type: integer
+          description: Team1 score
+        team2Score:
+          type: integer
+          description: Team2 score
+          
+    NewGame:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Game date
+          format: date-time
+        team1Id:
+          type: integer
+          description: Team1 ID value
+          minimum: 0
+          maximum: 10
+        team2Id:
+          type: integer
+          description: Team2 ID value
+          minimum: 0
+          maximum: 10
+        team1Score:
+          type: integer
+          description: Team1 score
+          minimum: 0
+          maximum: 10
+        team2Score:
+          type: integer
+          description: Team2 score
+          minimum: 0
+          maximum: 10
+      required:
+        - date
+        - team1Id
+        - team2Id
+        - team1Score
+        - team2Score
+
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Team ID
+        name:
+          type: string
+          description: Team name 
+
+    NewTeam:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Team name
+          minLength: 3
+          maxLength: 20
+      required:
+        - name
+    
