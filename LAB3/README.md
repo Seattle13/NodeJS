@@ -1,4 +1,6 @@
-# ![This is an image](https://www.vectorlogo.zone/logos/nodejs/nodejs-horizontal.svg) Node.js - Лабораторна робота 3
+Node.js - Лабораторна робота 3
+
+Виконав: Добридник Дмитро ІК-03
 
 ### _Тема: Express.js та EJS_
 
