@@ -1,4 +1,6 @@
-# ![This is an image](https://www.vectorlogo.zone/logos/nodejs/nodejs-horizontal.svg) Node.js - Лабораторна робота 1
+Node.js - Лабораторна робота 1
+
+Виконав: Добридник Дмитро ІК-03
 
 ### _Тема: Знайомство з середовищем Node.js_
 
